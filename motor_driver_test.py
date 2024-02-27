@@ -8,20 +8,22 @@ def main():
     # Pin Setup:
     # Board pin-numbering scheme
     GPIO.setmode(GPIO.BOARD)
-    # set pin as an output pin with optional initial state of HIGH
-    GPIO.setup(pwm_pins, GPIO.OUT, initial=GPIO.HIGH)
 
     _frequency_hz = 50
     _duty_cycle_percent = 25
     incr = 5
 
+    # set pin as an output pin with optional initial state of HIGH
+    GPIO.setup(pwm_pins[0], GPIO.OUT, initial=GPIO.HIGH)
     # p1 is a PWM object.
-    # TODO the order of the p1 and p2 initialization determines which one works
-    # and which one fails. Whichever is first will work, and whichever is
-    # second will fail. (verified with scope). 
     p1 = GPIO.PWM(pwm_pins[0], _frequency_hz)
-    p2 = GPIO.PWM(pwm_pins[1], _frequency_hz)
     p1.start(_duty_cycle_percent)
+    # set pin as an output pin with optional initial state of HIGH
+    # Note this setup cannot be combined by passing the whole array
+    # as indicated in the NVDIA README
+    # See: https://forums.developer.nvidia.com/t/unable-to-get-multiple-pwm-pins-to-work-simultaneously/284049
+    GPIO.setup(pwm_pins[1], GPIO.OUT, initial=GPIO.HIGH)
+    p2 = GPIO.PWM(pwm_pins[1], _frequency_hz)
     p2.start(_duty_cycle_percent)
 
     print("PWM running. Press CTRL+C to exit.")
