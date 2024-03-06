@@ -65,14 +65,15 @@ def main():
 
     speed = 0
     incr = 10  # Increment by 10 for each step
+    max_speed = 50
 
     print("PWM running. Press CTRL+C to exit.")
     try:
         while True:
-            time.sleep(0.25)
-            if speed >= 100:
+            time.sleep(0.5)
+            if speed >= max_speed:
                 incr = -incr
-            if speed <= -100:
+            if speed <= -max_speed:
                 incr = -incr
 
             speed += incr
