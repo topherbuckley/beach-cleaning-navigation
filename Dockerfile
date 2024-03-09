@@ -21,8 +21,8 @@ FROM nvcr.io/nvidia/l4t-base:r36.2.0 AS base
 
 WORKDIR /beach-cleaning-navigation
 
-RUN apt-get update
-RUN apt-get install -y python3-pip
+RUN sudo apt-get update
+RUN sudo apt-get install -y python3-pip
 RUN python3 -m pip install --no-cache-dir --upgrade pip
 
 # Copy the git repo contents to the container
