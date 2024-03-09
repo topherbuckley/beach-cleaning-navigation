@@ -17,13 +17,14 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-FROM nvcr.io/nvidia/l4t-base:r32.4.3 AS base
+FROM nvcr.io/nvidia/l4t-base:r36.2.0 AS base
 
 WORKDIR /beach-cleaning-navigation
 
 RUN apt-get update
 RUN apt-get install -y python3-pip
+RUN python3 -m pip install --no-cache-dir --upgrade pip
 
 # Copy the git repo contents to the container
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
