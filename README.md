@@ -25,7 +25,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 sudo docker run hello-world
 ```
-## Installing the Nvdia Container Toolkit
+## Installing the Nvidia Container Toolkit
 Taken from [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html):
 ```
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -46,4 +46,9 @@ sudo nvidia-ctk config --set nvidia-container-cli.no-cgroups --in-place
 ## Building the container
 `sudo docker image build -f Dockerfile -t beach-cleaning-navigation .`
 ## Running the container
-`sudo docker container run -it --runtime=nvidia --gpus all -v /sys:/sys --device /dev/gpiochip0 -e JETSON_MODEL_NAME=JETSON_ORIN_NANO beach-cleaning-navigation /bin/bash`
+```
+sudo docker container run -it --runtime=nvidia --gpus all \
+-v /sys:/sys --device /dev/gpiochip0 \
+-e JETSON_MODEL_NAME=JETSON_ORIN_NANO \
+beach-cleaning-navigation /bin/bash
+```
