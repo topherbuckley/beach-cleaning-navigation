@@ -1,3 +1,4 @@
+beachbot=0.0.1
 black==24.2.0
 click==8.1.7
 Jetson.GPIO==2.1.6
