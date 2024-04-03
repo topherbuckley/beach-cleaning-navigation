@@ -1,5 +1,7 @@
-from beachbot import manipulators
-import Jerson.GPIO as GPIO
+import time
+import math
+import Jetson.GPIO as GPIO
+from beachbot.manipulators import Motor
 
 
 def main():
@@ -9,21 +11,17 @@ def main():
 
     GPIO.setmode(GPIO.BOARD)
 
-    motor1 = manipulators.drive.Motor(
-        pwm_pins[0], gpio_pins[0], gpio_pins[1], _frequency_hz
-    )
-    motor2 = manipulators.drive.Motor(
-        pwm_pins[1], gpio_pins[2], gpio_pins[3], _frequency_hz
-    )
+    motor1 = Motor(pwm_pins[0], gpio_pins[0], gpio_pins[1], _frequency_hz)
+    motor2 = Motor(pwm_pins[1], gpio_pins[2], gpio_pins[3], _frequency_hz)
 
     speed = 0
     incr = 10  # Increment by 10 for each step
-    max_speed = 50
+    max_speed = 100
 
     print("PWM running. Press CTRL+C to exit.")
     try:
         while True:
-            time.sleep(0.5)
+            time.sleep(0.1)
             if speed >= max_speed:
                 incr = -incr
             if speed <= -max_speed:
